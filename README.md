@@ -68,14 +68,19 @@ POST 0.0.0.0:8000/ranking
 返すデータ
 
 ```
-[
-	{
-		"username": "hoge",
-		"score": 100
-	},
-	{
-		"username": "foo",
-		"score": 90
-	}
-]
+{
+	"username": "hoge",
+	"score": 100,
+	"rank": 1,
+	"ranking": [
+		{
+			"username": "hoge",
+			"score": 100
+		},
+		{
+			"username": "foo",
+			"score": 90
+		}
+	]
+}
 ```
