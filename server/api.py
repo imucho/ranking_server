@@ -54,7 +54,9 @@ class RankingResource:
                 ranking = r.zrange("ranking", 0, 99, desc=True, withscores=True)
                 res.status = falcon.HTTP_201
                 dict_ranking = [{"username": k.decode('utf-8'), "score": v} for (k, v) in ranking]
-                res.body = json.dumps(dict_ranking)
+                user_rank = r.zrevrank("ranking", username) + 1
+                return_data = {"username": username.decode('utf-8'), "score": score, "rank": user_rank, "ranking": dict_ranking}
+                res.body = json.dumps(return_data)
 
 api = falcon.API()
 api.add_route('/login', LogInResource())
