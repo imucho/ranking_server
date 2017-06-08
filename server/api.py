@@ -2,7 +2,7 @@ import redis
 import falcon
 import hashlib
 import json
-r = redis.Redis(host='localhost', port=6379, db=0)
+r = redis.Redis(host='db', port=6379, db=0)
 
 class LogInResource:
     def on_post(self, req, res):
