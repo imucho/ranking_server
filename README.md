@@ -67,7 +67,7 @@ POST 0.0.0.0:8000/ranking
 
 返すデータ
 
-```
+```js
 {
 	"username": "hoge",
 	"score": 100,

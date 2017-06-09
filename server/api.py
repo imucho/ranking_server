@@ -35,7 +35,7 @@ class RankingResource:
         ranking = r.zrange("ranking", 0, 99, desc=True, withscores=True)
         dict_ranking = [{"username": k.decode('utf-8'), "score": v} for (k, v) in ranking]
         res.status = falcon.HTTP_200
-        res.body = json.dumps(dict_ranking)
+        res.body = json.dumps({"ranking": dict_ranking})
 
     def on_post(self, req, res):
         post_data = json.loads(req.stream.read().decode('utf-8'))
