@@ -2,10 +2,24 @@ import falcon
 import json
 import MySQLdb
 
-USER = 'root'
-PASS = 'ca_sge_teamf'
-HOST = '0.0.0.0'
+USER = 'teamf'
+PASS = 'sge_teamf'
+HOST = 'db'
 DB = 'SGE'
+
+def initTable():
+    connector = MySQLdb.connect(
+            user=USER,
+            passwd=PASS,
+            host=HOST,
+            db=DB)
+    cursor = connector.cursor()
+    cursor.execute('SHOW TABLES FROM SGE LIKE "ranking"')
+    if cursor.fetchone() is None:
+        cursor.execute('CREATE TABLE ranking (id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, username varchar(30), weight int(11) DEFAULT 0, score int(11) DEFAULT 0)')
+    cursor.close
+    connector.commit()
+    connector.close
 
 def getRanking():
     connector = MySQLdb.connect(
@@ -69,6 +83,7 @@ class ScoreResource:
     def on_get(self, req, res, score):
         res.body = json.dumps({'ranking': getRanking(), 'rank': getRank(score)})
 
+initTable()
 api = falcon.API()
 api.add_route('/ranking', RankingResource())
 api.add_route('/score/{score}', ScoreResource())

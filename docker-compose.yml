@@ -3,12 +3,17 @@ services:
   mysql:
     image: mysql:5.7
     command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    ports:
+      - 3306:3306
     expose:
       - 3306
     environment:
       - MYSQL_ROOT_PASSWORD=ca_sge_teamf
+      - MYSQL_USER=teamf
+      - MYSQL_PASSWORD=sge_teamf
+      - MYSQL_DATABASE=SGE
     volumes:
-      - $PWD/DB:/docker-entrypoint-initdb.d
+      - $PWD/DB:/var/lib/mysql
     restart: always
   server:
     build: ./server
