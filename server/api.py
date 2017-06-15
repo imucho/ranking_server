@@ -29,7 +29,7 @@ def getRanking():
             db=DB)
 
     cursor = connector.cursor()
-    cursor.execute('SELECT username, weight, score FROM ranking ORDER BY score DESC LIMIT 100')
+    cursor.execute('SELECT username, weight, score FROM ranking ORDER BY score DESC LIMIT 4')
     array = []
     for (rank, row) in enumerate(cursor.fetchall()):
         array.append({'rank': rank+1, 'username': row[0], 'weight': row[1], 'score': row[2]})
