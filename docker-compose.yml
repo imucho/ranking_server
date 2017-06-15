@@ -1,14 +1,21 @@
 version: '2'
 services:
-  redis:
-    image: redis:3.2.9-alpine
+  mysql:
+    image: mysql:5.7
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    ports:
+      - 3306:3306
     expose:
-      - 6379
+      - 3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=ca_sge_teamf
+    volumes:
+      - $PWD/DB:/docker-entrypoint-initdb.d
   server:
     build: ./server
     image: ranking:sge
     ports:
-      - 8000:8000
+      - 80:8000
     links:
-      - redis:db
+      - mysql:db
     command: gunicorn api:api -b 0.0.0.0:8000
