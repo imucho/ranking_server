@@ -2,9 +2,9 @@ import falcon
 import json
 import MySQLdb
 
-USER = 'root'
-PASS = 'ca_sge_teamf'
-HOST = '0.0.0.0'
+USER = 'teamf'
+PASS = 'sge_teamf'
+HOST = 'db'
 DB = 'SGE'
 
 def getRanking():

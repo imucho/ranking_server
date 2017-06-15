@@ -7,6 +7,9 @@ services:
       - 3306
     environment:
       - MYSQL_ROOT_PASSWORD=ca_sge_teamf
+      - MYSQL_DATABASE=SGE
+      - MYSQL_USER=teamf
+      - MYSQL_PASSWORD=sge_teamf
     volumes:
       - $PWD/DB:/docker-entrypoint-initdb.d
     restart: always
