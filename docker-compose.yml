@@ -13,7 +13,7 @@ services:
       - MYSQL_PASSWORD=sge_teamf
       - MYSQL_DATABASE=SGE
     volumes:
-      - $PWD/DB:/docker-entrypoint-initdb.d
+      - $PWD/DB:/var/lib/mysql
     restart: always
   server:
     build: ./server
